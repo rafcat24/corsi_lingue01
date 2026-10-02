@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Corsi Lingue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Menu di Navigazione (visibile dopo il login) -->
+    <nav id="menu-bar" class="hidden">
+        <span id="user-info"></span>
+        <div id="menu-links"></div>
+        <button id="btn-logout" onclick="logout()">Logout</button>
+    </nav>
+
+    <main>
+        <!-- Maschera 1: Login -->
+        <section id="mask-login" class="mask">
+            <h2>Accesso al Sistema</h2>
+            <form id="form-login" onsubmit="handleLogin(event)">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+
+                <button type="submit">Accedi</button>
+            </form>
+        </section>
+
+        <!-- Maschera 3: Attivazione di un Corso (Segreteria) -->
+        <section id="mask-attiva-corso" class="mask hidden">
+            <h2>Attivazione Nuovo Corso</h2>
+            <form id="form-corso" onsubmit="handleCreaCorso(event)">
+                <label for="nome-corso">Nome Corso:</label>
+                <input type="text" id="nome-corso" required>
+
+                <label for="numero-ore">Numero Ore:</label>
+                <input type="number" id="numero-ore" required>
+
+                <label for="data-inizio">Data Inizio:</label>
+                <input type="date" id="data-inizio" required>
+
+                <label for="importo">Importo (€):</label>
+                <input type="number" step="0.01" id="importo" required>
+
+                <button type="submit">Crea e Attiva Corso</button>
+            </form>
+        </section>
+
+        <!-- Maschera 4: Disattivazione Corso (Segreteria) -->
+        <section id="mask-disattiva-corso" class="mask hidden">
+            <h2>Disattivazione Corsi Attivi</h2>
+            <div id="lista-corsi-attivi"></div>
+        </section>
+
+        <!-- Maschera 5: Iscrizione ad un Corso (Cliente) -->
+        <section id="mask-iscrizione" class="mask hidden">
+            <h2>Iscriviti ad un Corso Disponibile</h2>
+            <div id="lista-corsi-disponibili"></div>
+        </section>
+
+        <!-- Maschera 6: Pagamento Iscrizione (Segreteria) -->
+        <section id="mask-pagamento" class="mask hidden">
+            <h2>Gestione Pagamenti Iscrizioni</h2>
+            <div id="lista-iscrizioni-aperte"></div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
