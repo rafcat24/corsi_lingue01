@@ -10,13 +10,28 @@ app.use(cors());
 app.use(express.static(__dirname)); // Serve i file HTML/CSS/JS statici
 
 // Connessione al database PostgreSQL
-const pool = new Pool({
+/* const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     password: 'postgres', // <--- Aggiunto qui
     database: 'corsi_lingue',
     port: 5432,
-});
+}); */
+
+const pool = new Pool(
+  process.env.DATABASE_URL
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false }
+      }
+    : {
+        user: 'postgres',
+        host: 'localhost',
+        database: 'corsi_lingue',
+        password: 'postgres',
+        port: 5432,
+      }
+);
 
 // Endpoint di Login con verifica Argon2
 app.post('/api/login', async (req, res) => {
@@ -121,7 +136,15 @@ app.put('/api/iscrizioni/:id/paga', async (req, res) => {
     }
 });
 
+/*
 const PORT = 8080;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server in ascolto sulla porta ${PORT}`);
+});
+*/
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server in ascolto sulla porta ${PORT}`);
 });
